@@ -7,10 +7,10 @@ const Hand = ({ className }) => {
     const hand = useSelector(state => state.hand);
     const dispatch = useDispatch();
     console.log(hand)
-    const Cards = () => hand.map((card, i) => <div className='h-full max-h-full p-1' > <Card {...card} onClick={() => dispatch(discard(card.id))} /></div>);
+    const Cards = () => hand.map((card, i) => <div className='h-full p-1' > <Card {...card} onClick={() => dispatch(discard(card.id))} /></div>);
     return (
         <div className={className}>
-            <div className='relative min-h-card flex'>
+            <div className='relative min-h-card flex h-full'>
                 <Cards />
             </div>
         </div>
