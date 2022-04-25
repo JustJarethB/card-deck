@@ -1,9 +1,8 @@
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { shuffle } from './reducers/deck';
-import { Card } from './components';
+import { Deck } from './components';
 function App() {
-  const deck = useSelector(state => state.deck);
   const dispatch = useDispatch();
   return (
     <div className="App">
@@ -11,7 +10,7 @@ function App() {
         <button onClick={() => dispatch(shuffle())}>Shuffle</button>
       </div>
       <div>
-        {deck.map(card => <Card {...card} />)}
+        <Deck className="w-1/8" />
       </div>
     </div>
   );
