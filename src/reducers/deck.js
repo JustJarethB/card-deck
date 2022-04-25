@@ -4,12 +4,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const suits = ['C', 'H', 'S', 'D'];
 const values = ['AA', '02', '03', '04', '05', '06', '07', '08', '09', '10', 'JJ', 'QQ', 'KK'];
-const generateCard = (suit, value) => ({
+const generateCard = (suit, value, weight) => ({
     suit,
     value,
+    weight,
     id: `${suit}${value}`,
 })
-const generateDeck = () => suits.map(s => values.map(v => generateCard(s, v))).reduce((acc, v) => acc.concat(v), []);
+const generateDeck = () => suits.map(s => values.map((v, i) => generateCard(s, v, i))).reduce((acc, v) => acc.concat(v), []);
 
 export const fullSlice = createSlice({
     name: 'full',
@@ -38,7 +39,7 @@ export const fullSlice = createSlice({
                 case 'INIT': //fall through
                 default:
                     // New Deck Order: A-K A-K K-A K-A HCDS
-                    const sorter = (a, b) => a.value - b.value;
+                    const sorter = (a, b) => a.weight - b.weight;
                     let temp = { 'C': [], 'H': [], 'S': [], 'D': [] };
                     deck.forEach(el => temp[el.suit].push(el)); //gather into suits
                     suits.forEach(suit => temp[suit].sort(sorter)); // sort suits
