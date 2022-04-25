@@ -1,12 +1,13 @@
 import { Image } from './'
 const Card = props => {
-    const { id } = props;
+    const { id, onClick } = props;
     let src = `card-fronts/${id}.png`;
-    console.log(src);
+    // console.log(src);
     return (
-        <div id={id} className="min-h-card h-full">
+        <button onClick={(onClick && typeof onClick == 'function') ? onClick : null} id={id} className="min-h-card h-full">
+
             <Image path={src} className="object-contain w-full h-full" />
-        </div>
+        </button>
     )
 }
 

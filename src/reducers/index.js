@@ -1,4 +1,4 @@
 /* eslint-disable import/no-anonymous-default-export */
-import deck from './deck';
+import full from './deck';
 
-export default { deck: deck };
+export default full;
