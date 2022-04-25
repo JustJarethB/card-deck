@@ -30,13 +30,22 @@ export const fullSlice = createSlice({
             // dispatch(add());
         },
         sortDeck: ({ deck }, action) => {
-            console.log('sort')
+            console.log('sort', action)
             switch (action.payload) {
                 case 'CHASE':
+                    console.error("UNIMPLEMENTED")
                     return;
                 case 'INIT': //fall through
                 default:
                     // New Deck Order: A-K A-K K-A K-A HCDS
+                    const sorter = (a, b) => a.value - b.value;
+                    let temp = { 'C': [], 'H': [], 'S': [], 'D': [] };
+                    deck.forEach(el => temp[el.suit].push(el)); //gather into suits
+                    suits.forEach(suit => temp[suit].sort(sorter)); // sort suits
+                    ['S', 'D'].forEach(suit => temp[suit].reverse()); // reverse for 'kissing kings'
+                    // cannot reassign deck with createSlice so emptying array and re-populating
+                    deck.splice(0);
+                    deck.push(...temp['C'], ...temp['H'], ...temp['S'], ...temp['D']);
                     return;
             }
         },
