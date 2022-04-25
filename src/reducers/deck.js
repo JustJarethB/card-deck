@@ -2,7 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const suits = ['C', 'H', 'S', 'D'];
 const values = ['AA', '02', '03', '04', '05', '06', '07', '08', '09', '10', 'JJ', 'QQ', 'KK'];
-const generateDeck = () => suits.map(s => values.map(v => ({ id: `${s}${v}` }))).reduce((acc, v) => acc.concat(v), []);
+const generateCard = (suit, value) => ({
+    suit,
+    value,
+    id: `${suit}${value}`,
+})
+const generateDeck = () => suits.map(s => values.map(v => generateCard(s, v))).reduce((acc, v) => acc.concat(v), []);
 
 export const deckSlice = createSlice({
     name: 'deck',
